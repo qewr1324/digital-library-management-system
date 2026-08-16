@@ -1,5 +1,6 @@
 package ir.nas.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+// import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
@@ -26,7 +27,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = { "profile", "books" })
 @EqualsAndHashCode(callSuper = true, exclude = { "profile", "books" })
-@SuperBuilder
+// @SuperBuilder
 @Entity
 @Table(name = "authors")
 public class Author extends BaseModel<UUID>
@@ -46,4 +47,66 @@ public class Author extends BaseModel<UUID>
 
     @ManyToMany
     private List<Book> books;
+
+    public static Builder builder()
+    {
+        return new Author().new Builder();
+    }
+
+    public class Builder
+    {
+        private final Author author;
+
+        public Builder()
+        {
+            this.author = new Author();
+        }
+
+        public Builder id(final UUID id)
+        {
+            this.author.setId(id);
+            return this;
+        }
+
+        public Builder name(final String name)
+        {
+            this.author.setName(name);
+            return this;
+        }
+
+        public Builder birthDate(final int birthDate)
+        {
+            this.author.setBirthDate(birthDate);
+            return this;
+        }
+
+        public Builder profile(final Profile profile)
+        {
+            this.author.setProfile(profile);
+            return this;
+        }
+
+        public Builder books(final List<Book> books)
+        {
+            this.author.setBooks(books);
+            return this;
+        }
+
+        public Builder createdAt(final LocalDateTime createdLocalDateTime)
+        {
+            this.author.setCreatedAt(createdLocalDateTime);
+            return this;
+        }
+
+        public Builder updatedAt(final LocalDateTime updatedLocalDateTime)
+        {
+            this.author.setUpdateAt(updatedLocalDateTime);
+            return this;
+        }
+
+        public Author build()
+        {
+            return this.author;
+        }
+    }
 }
