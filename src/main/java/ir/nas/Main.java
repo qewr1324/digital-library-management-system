@@ -1,7 +1,12 @@
 package ir.nas;
 
-import ir.nas.model.Author;
+import java.util.UUID;
+
 import ir.nas.model.Book;
+import ir.nas.repository.BookRepositoryCreator;
+import ir.nas.repository.RepositoryCreator;
+import ir.nas.repository.book.BookRepositoryImpl;
+import ir.nas.service.BookService;
 
 public class Main
 {
@@ -9,10 +14,7 @@ public class Main
     {
         System.out.println("Hello world!");
 
-        Author tAuthor = new Author().new Builder().build();
-        Author author = Author.builder().build();
-        Book book = Book.builder().ISBN(null).build();
-
-        // new Book().id
+        RepositoryCreator<BookRepositoryImpl, Book, UUID> repositoryCreator = new BookRepositoryCreator();
+        // BookService bookService = new BookService(repositoryCreator);
     }
 }
