@@ -23,7 +23,7 @@ public final class HibernateUtil
     private HibernateUtil()
     {}
 
-    public synchronized static final <T> T persist(final Function<EntityManager, T> function)
+    public synchronized static final <T> T transaction(final Function<EntityManager, T> function)
     {
         return new HibernateUtil().inTxReturn(function);
     }
