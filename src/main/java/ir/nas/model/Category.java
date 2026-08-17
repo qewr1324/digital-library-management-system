@@ -37,6 +37,6 @@ public class Category extends BaseModel<Long>
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     private List<Book> books;
 }

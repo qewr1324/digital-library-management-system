@@ -45,7 +45,7 @@ public class Author extends BaseModel<UUID>
     @OneToOne
     private Profile profile;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "authors")
     private List<Book> books;
 
     public static Builder builder()

@@ -22,7 +22,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@ToString(callSuper = true, exclude = {"author"})
+@ToString(callSuper = true, exclude = { "author" })
 @EqualsAndHashCode(callSuper = true, exclude = { "author" })
 @Entity
 @Table(name = "profiles")
@@ -40,6 +40,6 @@ public class Profile extends BaseModel<Long>
     @Column(name = "website", length = 50, unique = true)
     private String website;
 
-    @OneToOne
+    @OneToOne(mappedBy = "profile")
     private Author author;
 }
