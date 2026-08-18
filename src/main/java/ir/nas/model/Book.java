@@ -48,7 +48,7 @@ public class Book extends BaseModel<UUID>
     @Column(name = "isbn", nullable = false, length = 50, unique = true)
     private String ISBN;
 
-    @Column(name = "publication_year", nullable = false, unique = true)
+    @Column(name = "publication_year", nullable = false)
     private int publicationYear;
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
