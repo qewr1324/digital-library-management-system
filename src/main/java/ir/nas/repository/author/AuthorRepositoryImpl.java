@@ -1,5 +1,6 @@
 package ir.nas.repository.author;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,8 @@ public class AuthorRepositoryImpl extends AuthorRepository
         src.setName(target.getName());
         src.setBirthDate(target.getBirthDate());
 
-        src.setBooks(target.getBooks());
+        // src.setBooks(target.getBooks());
+        src.setBooks(new ArrayList<>(target.getBooks()));
         src.setProfile(target.getProfile());
 
         src.setCreatedAt(target.getCreatedAt());

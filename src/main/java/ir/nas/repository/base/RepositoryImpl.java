@@ -58,8 +58,9 @@ public abstract class RepositoryImpl<T extends BaseModel<ID>, ID> implements Rep
     public final T update(final T t)
     {
         return HibernateUtil.transaction(em -> {
-            T findedT = em.find(clazz, t.getId());
-            return this.updateModel(findedT, t);
+            // T findedT = em.find(clazz, t.getId());
+            return em.merge(t);
+            // return this.updateModel(findedT, t);
         });
     }
 

@@ -2,6 +2,7 @@ package ir.nas.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import org.hibernate.annotations.UuidGenerator.Style;
 
 import ir.nas.enums.StockStatus;
 import ir.nas.model.embeddable.Address;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -61,11 +63,20 @@ public class Book extends BaseModel<UUID>
     @Embedded
     private Address publisherAddress;
 
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Author> authors;
 
     @ManyToOne
     private Category category;
+
+    public void addAuthor(final Author author)
+    {
+        if (this.authors == null)
+            this.authors = new ArrayList<>();
+
+        this.authors.add(author);
+        author.addBook(this);
+    }
 
     public static Builder builder()
     {
@@ -125,7 +136,7 @@ public class Book extends BaseModel<UUID>
 
         public Builder authors(final List<Author> authors)
         {
-            this.book.setAuthors(authors);
+            this.book.setAuthors(new ArrayList<>(authors));
             return this;
         }
 

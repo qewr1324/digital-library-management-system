@@ -1,6 +1,7 @@
 package ir.nas.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,6 +50,20 @@ public class Author extends BaseModel<UUID>
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
 
+    public void addProfile(final Profile profile)
+    {
+        this.profile = profile;
+        profile.setAuthor(this);
+    }
+
+    public void addBook(final Book book)
+    {
+        if (this.books == null)
+            this.books = new ArrayList<>();
+
+        this.books.add(book);
+    }
+
     public static Builder builder()
     {
         return new Author().new Builder();
@@ -89,7 +104,7 @@ public class Author extends BaseModel<UUID>
 
         public Builder books(final List<Book> books)
         {
-            this.author.setBooks(books);
+            this.author.setBooks(new ArrayList<>(books));
             return this;
         }
 

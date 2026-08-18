@@ -1,11 +1,13 @@
 package ir.nas.repository.book;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import ir.nas.enums.StockStatus;
 import ir.nas.model.Book;
 import ir.nas.util.HibernateUtil;
+import jakarta.persistence.TypedQuery;
 
 public final class BookRepositoryImpl extends BookRepository
 {
@@ -67,12 +69,26 @@ public final class BookRepositoryImpl extends BookRepository
         src.getPublisherAddress().setStreet(target.getPublisherAddress().getStreet());
         src.getPublisherAddress().setPostalCode(target.getPublisherAddress().getPostalCode());
 
-        src.setAuthors(target.getAuthors());
+        // !AI "Found shared references to a collection"
+        src.setAuthors(new ArrayList<>(target.getAuthors()));
+        // src.setAuthors(target.getAuthors());
+
         src.setCategory(target.getCategory());
 
         src.setCreatedAt(target.getCreatedAt());
         src.setUpdateAt(target.getUpdateAt());
 
         return src;
+    }
+
+    @Override
+    public Optional<Book> findByISBNWithAuthors(final String ISBN)
+    {
+        final String FIND_BY_ISBN_QUERY = "FROM Book b JOIN FETCH b.authors WHERE b.ISBN = :book_isbn";
+        return Optional.ofNullable(HibernateUtil.transaction(em -> {
+            return em.createQuery(FIND_BY_ISBN_QUERY, Book.class)
+                    .setParameter("book_isbn", ISBN)
+                    .getSingleResult();
+        }));
     }
 }

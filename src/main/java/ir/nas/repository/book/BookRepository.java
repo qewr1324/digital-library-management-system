@@ -19,6 +19,8 @@ public abstract class BookRepository extends RepositoryImpl<Book, UUID>
 
     public abstract Optional<Book> findByISBN(final String ISBN);
 
+    public abstract Optional<Book> findByISBNWithAuthors(final String ISBN);
+
     public abstract List<Book> findByPublicationYear(final int publicationYear);
 
     public abstract List<Book> findByStockStatus(final StockStatus stockStatus);

@@ -59,6 +59,13 @@ public final class BookService
         });
     }
 
+    public final Book findByISBNWithAuthors(final String ISBN)
+    {
+        return this.bRepository.findByISBNWithAuthors(ISBN).orElseThrow(() -> {
+            throw new ModelNotFoundException("Book Not Found By This ISBN [%s]".formatted(ISBN));
+        });
+    }
+
     public final List<Book> findBookByPublicationYear(final int publicationYear)
     {
         return this.bRepository.findByPublicationYear(publicationYear);

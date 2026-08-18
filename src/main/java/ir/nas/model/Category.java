@@ -44,7 +44,7 @@ public class Category extends BaseModel<Long>
     // private List<Book> books = new ArrayList<>();
     private List<Book> books;
 
-    public void addBook(Book book)
+    public void addBook(final Book book)
     {
         if (this.books == null)
             this.books = new ArrayList<>();
