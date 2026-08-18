@@ -84,6 +84,8 @@ public final class BookRepositoryImpl extends BookRepository
     @Override
     public Optional<Book> findByISBNWithAuthors(final String ISBN)
     {
+        // final String FIND_BY_ISBN_QUERY = "FROM Book b LEFT JOIN FETCH b.authors WHERE b.ISBN = :book_isbn";
+
         final String FIND_BY_ISBN_QUERY = "FROM Book b JOIN FETCH b.authors WHERE b.ISBN = :book_isbn";
         return Optional.ofNullable(HibernateUtil.transaction(em -> {
             return em.createQuery(FIND_BY_ISBN_QUERY, Book.class)
