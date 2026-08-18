@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.annotations.UuidGenerator.Style;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -42,7 +43,7 @@ public class Author extends BaseModel<UUID>
     @Column(name = "birth_date")
     private int birthDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Profile profile;
 
     @ManyToMany(mappedBy = "authors")
