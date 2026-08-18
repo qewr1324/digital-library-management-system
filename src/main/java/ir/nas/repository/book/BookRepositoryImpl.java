@@ -7,7 +7,7 @@ import ir.nas.enums.StockStatus;
 import ir.nas.model.Book;
 import ir.nas.util.HibernateUtil;
 
-public class BookRepositoryImpl extends BookRepository
+public final class BookRepositoryImpl extends BookRepository
 {
     @Override
     public final Optional<Book> findByISBN(final String ISBN)
