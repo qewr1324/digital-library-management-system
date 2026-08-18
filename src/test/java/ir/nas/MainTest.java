@@ -112,8 +112,10 @@ public class MainTest
 
         Category category = Category.builder()
                 .name("Game")
-                .books(Arrays.asList(book, book2))
                 .build();
+
+        category.addBook(book);
+        category.addBook(book2);
 
         Long categoryId = cService.addCategory(category);
         Category retrieveCategory = cService.findCategoryById(categoryId);

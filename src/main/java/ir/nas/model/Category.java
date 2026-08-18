@@ -1,5 +1,6 @@
 package ir.nas.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -40,5 +41,15 @@ public class Category extends BaseModel<Long>
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    // private List<Book> books = new ArrayList<>();
     private List<Book> books;
+
+    public void addBook(Book book)
+    {
+        if (this.books == null)
+            this.books = new ArrayList<>();
+
+        this.books.add(book);
+        book.setCategory(this);
+    }
 }
