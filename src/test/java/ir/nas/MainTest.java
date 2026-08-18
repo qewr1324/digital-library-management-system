@@ -25,17 +25,17 @@ import ir.nas.service.CategoryService;
 public class MainTest
 {
     // private RepositoryFactory repositoryFactory;
-    private BookService bService;
-    private CategoryService cService;
+    private static BookService bService;
+    private static CategoryService cService;
 
     @BeforeAll
-    public void setup()
+    public static void setup()
     {
         // this.repositoryFactory = new BookRepo();
-        this.bService = new BookService(new BookRepo());
+        bService = new BookService(new BookRepo());
 
         // this.repositoryFactory = new CategoryRepo();
-        this.cService = new CategoryService(new CategoryRepo());
+        cService = new CategoryService(new CategoryRepo());
     }
 
     @Test
@@ -86,6 +86,12 @@ public class MainTest
                 .postalCode("9876543210")
                 .build();
 
+        Address address2 = Address.builder()
+                .city("Teyrun")
+                .street("Hooshyar")
+                .postalCode("8765467837")
+                .build();
+
         Book book = Book.builder()
                 .title("Game Design")
                 .ISBN("321-231-132")
@@ -101,7 +107,7 @@ public class MainTest
                 .publicationYear(2005)
                 .price(new BigDecimal(50.99))
                 .stockStatus(StockStatus.OUT_OF_STOCK)
-                .publisherAddress(address)
+                .publisherAddress(address2)
                 .build();
 
         Category category = Category.builder()
@@ -122,6 +128,8 @@ public class MainTest
             4. Save only the Category object.
             5. Retrieve the category by its ID.
             6. Assert that the retrieved category is not null.
+            7. Verify that the category contains the books that were added before saving.
+            8. Verify that the books were automatically persisted to the database through CascadeType.PERSIST.
         */
     }
 

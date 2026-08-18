@@ -8,13 +8,16 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>ir.nas.model.Book</class>
+        <class>ir.nas.model.Author</class>
+        <class>ir.nas.model.Category</class>
+        <class>ir.nas.model.Profile</class>
 
         <properties>
             <!-- Database Config -->
             <!-- PostgreSQL -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="jakarta.persistence.jdbc.url"
-                value="jdbc:postgresql://localhost:5432/digital-library-management-system" />
+                value="jdbc:postgresql://localhost:5432/digital_library_management_system" />
             <property name="jakarta.persistence.jdbc.user" value="postgres" />
             <property name="jakarta.persistence.jdbc.password" value="1234" />
 
